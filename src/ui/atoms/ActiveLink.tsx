@@ -8,6 +8,8 @@ import { type Route } from "next";
 type ActiveLinkProps<T extends Route> = {
 	href: T;
 	children: ReactNode;
+	className: string;
+	activeClassName: string;
 };
 
 export const ActiveLink = <T extends Route>({
@@ -15,7 +17,7 @@ export const ActiveLink = <T extends Route>({
 	children,
 	className,
 	activeClassName,
-}: ActiveLinkProps<T> & { className: string; activeClassName: string }) => {
+}: ActiveLinkProps<T>) => {
 	const pathname = usePathname();
 	const isActive = pathname === href;
 
