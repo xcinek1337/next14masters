@@ -14,6 +14,7 @@ export const ActiveLink = ({ href, children }: { href: string; children: ReactNo
 			className={clsx(`text-blue-500 hover:text-blue-700`, {
 				underline: isActive,
 			})}
+			aria-current={isActive ? "page" : undefined}
 		>
 			{children}
 		</Link>

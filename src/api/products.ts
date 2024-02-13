@@ -16,17 +16,16 @@ type ProductResponseItem = {
 export const getProductsList = async () => {
 	const res = await fetch("https://naszsklep-api.vercel.app/api/products");
 	const productsResp = (await res.json()) as ProductResponseItem[];
-	const products = productsResp.map((product) => productResponseItemToProductItemType(product));
+	const products = productsResp.map(productResponseItemToProductItemType);
 
 	return products;
 };
 
 export const getProductById = async (id: ProductResponseItem["id"]) => {
 	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
-	const productResponse = (await res.json()) as ProductResponseItem[];
-	const product = productResponse.map((product) => productResponseItemToProductItemType(product));
-    
-	return product;
+	const productResponse = (await res.json()) as ProductResponseItem;
+
+	return productResponseItemToProductItemType(productResponse);
 };
 
 const productResponseItemToProductItemType = (product: ProductResponseItem): ProductItemType => {
@@ -35,6 +34,7 @@ const productResponseItemToProductItemType = (product: ProductResponseItem): Pro
 		name: product.title,
 		category: product.category,
 		price: product.price,
+		description: product.description,
 		coverImage: {
 			alt: product.title,
 			src: product.image,
