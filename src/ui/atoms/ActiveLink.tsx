@@ -5,15 +5,25 @@ import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
 import { type Route } from "next";
 
-export const ActiveLink = ({ href, children }: { href: Route; children: ReactNode }) => {
+type ActiveLinkProps<T extends Route> = {
+	href: T;
+	children: ReactNode;
+};
+
+export const ActiveLink = <T extends Route>({
+	href,
+	children,
+	className,
+	activeClassName,
+}: ActiveLinkProps<T> & { className: string; activeClassName: string }) => {
 	const pathname = usePathname();
 	const isActive = pathname === href;
 
 	return (
 		<Link
 			href={href}
-			className={clsx(`text-blue-500 hover:text-blue-700`, {
-				underline: isActive,
+			className={clsx(className, {
+				[activeClassName]: isActive,
 			})}
 			aria-current={isActive ? "page" : undefined}
 		>
