@@ -1,10 +1,8 @@
+import { Suspense } from "react";
+import { type Metadata } from "next";
 import { getProductById } from "@/api/products";
 import { SingleProduct } from "@/ui/organisms/SingleProduct";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
-
-
-import { Metadata } from "next";
-import { Suspense } from "react";
 
 export const generateMetadata = async ({
 	params,

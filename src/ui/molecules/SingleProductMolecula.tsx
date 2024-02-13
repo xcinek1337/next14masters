@@ -5,7 +5,7 @@ import { SingleProductImage } from "@/ui/atoms/SingleProductImage";
 import { SingleProductName } from "@/ui/atoms/SingleProductName";
 import { SingleProductPrice } from "@/ui/atoms/SingleProductPrice";
 import { SingleProductSelect } from "@/ui/atoms/SingleProductSelect";
-import { ProductItemType } from "@/ui/types";
+import { type ProductItemType } from "@/ui/types";
 
 export const SingleProductMolecula = ({ product }: { product: ProductItemType }) => {
 	return (
