@@ -13,7 +13,6 @@ export const Pagination = ({ currentPage = 1, totalPages }: PaginationProps) => 
 			</ActiveLink>
 			<div className="flex gap-4 rounded-lg px-4">
 				{Array.from({ length: totalPages }, (_, i) => {
-					console.log(i, currentPage);
 					return (
 						<ActiveLink
 							exact

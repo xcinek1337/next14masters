@@ -12,7 +12,6 @@ export default async function ProductsLayout({
 	const products = await getProductsAllOrPaginated();
 	const totalPages = Math.ceil(products.length / 8);
 
-	console.log(params);
 	return (
 		<>
 			<section>{children}</section>
