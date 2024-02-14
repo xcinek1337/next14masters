@@ -1,25 +1,28 @@
 "use client";
-import Link from "next/link";
+import Link, { type LinkProps } from "next/link";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
 import { type Route } from "next";
 
-type ActiveLinkProps<T extends Route> = {
-	href: T;
+type ActiveLinkProps<T extends string> = {
+	href: Route<T>;
 	children: ReactNode;
-	className: string;
-	activeClassName: string;
-};
+	exact?: boolean;
+	className?: string;
+	activeClassName?: string;
+}& Omit<LinkProps<T>, "href">;;
 
-export const ActiveLink = <T extends Route>({
-	href,
+export const ActiveLink = <T extends string>({
+	activeClassName = "underline",
+	className = "text-blue-500 hover:text-blue-700",
 	children,
-	className,
-	activeClassName,
+	exact,
+	href,
+	...props
 }: ActiveLinkProps<T>) => {
 	const pathname = usePathname();
-	const isActive = pathname === href;
+	const isActive = exact ? pathname === href : pathname.startsWith(href as string);
 
 	return (
 		<Link
@@ -28,6 +31,7 @@ export const ActiveLink = <T extends Route>({
 				[activeClassName]: isActive,
 			})}
 			aria-current={isActive ? "page" : undefined}
+			{...props}
 		>
 			{children}
 		</Link>

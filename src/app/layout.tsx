@@ -21,10 +21,12 @@ export default function RootLayout({
 				<nav>
 					<ul className="mt-2 flex justify-center space-x-4">
 						<li>
-							<ActiveLink  activeClassName="underline" className="text-blue-500 hover:text-blue-700" href={"/"}>Home</ActiveLink>
+							<ActiveLink exact href={"/"}>
+								Home
+							</ActiveLink>
 						</li>
 						<li>
-							<ActiveLink activeClassName="underline" className="text-blue-500 hover:text-blue-700" href={"/products"}>All</ActiveLink>
+							<ActiveLink  href={"/products"}>All</ActiveLink>
 						</li>
 					</ul>
 				</nav>
@@ -33,7 +35,7 @@ export default function RootLayout({
 					{children}
 				</section>
 
-				<footer className="text-center text-sm text-gray-500">&copy; 2023</footer>
+				<footer className="text-center text-sm text-gray-500">&copy; 2077</footer>
 			</body>
 		</html>
 	);

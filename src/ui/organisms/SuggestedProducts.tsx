@@ -1,4 +1,4 @@
-import { getProductsList } from "@/api/products";
+import { getProductsAllOrPaginated } from "@/api/products";
 import { SuggestedProductHeader } from "@/ui/atoms/SuggestedProductHeader";
 import { ProductList } from "@/ui/organisms/ProductList";
 
@@ -6,7 +6,7 @@ import { ProductList } from "@/ui/organisms/ProductList";
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const SuggestedProducts = async () => {
-	const products = (await getProductsList()).slice(0, 4);
+	const products = (await getProductsAllOrPaginated()).slice(0, 4);
 	await sleep(2000);
 
 	return (
