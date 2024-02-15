@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 export const ProductCoverImage = ({ src, alt }: { src: string; alt: string }) => {
 	return (
-		<div className="aspect-square overflow-hidden rounded-md border bg-slate-50 hover:bg-slate-100">
+		<div className="aspect-square overflow-hidden rounded-md border bg-slate-50 hover:bg-emerald-50">
 			<img
 				width={320}
 				height={320}

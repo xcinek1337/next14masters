@@ -11,11 +11,11 @@ type ActiveLinkProps<T extends string> = {
 	exact?: boolean;
 	className?: string;
 	activeClassName?: string;
-}& Omit<LinkProps<T>, "href">;;
+} & Omit<LinkProps<T>, "href">;
 
 export const ActiveLink = <T extends string>({
-	activeClassName = "underline",
-	className = "text-blue-500 hover:text-blue-700",
+	activeClassName = "bg-amber-200 shadow-lg shadow-red-200 ",
+	className = "text-xl text-emerald-700 hover:bg-amber-300 hover:shadow-red-100 rounded-2xl shadow-lg px-6 py-3 mr-5",
 	children,
 	exact,
 	href,

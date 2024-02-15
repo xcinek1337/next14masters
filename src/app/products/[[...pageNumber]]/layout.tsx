@@ -1,5 +1,5 @@
 import { getProductsAllOrPaginated } from "@/api/products";
-import { Pagination } from "@/ui/organisms/Pagination";
+import { Pagination } from "@/ui/molecules/Pagination";
 
 export default async function ProductsLayout({
 	children,
