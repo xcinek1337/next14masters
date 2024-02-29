@@ -1,4 +1,4 @@
-import { getProductsAllOrPaginated } from "@/api/products";
+import { getPaginatedListOfProducts } from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
 
 export default async function ProductsLayout({
@@ -9,8 +9,8 @@ export default async function ProductsLayout({
 	params: { pageNumber: string[] };
 }) {
 	const currentPage = params.pageNumber ? Number(params.pageNumber[0]) : 1;
-	const products = await getProductsAllOrPaginated();
-	const totalPages = Math.ceil(products.length / 8);
+	const products = await getPaginatedListOfProducts(5,2);
+	const totalPages = Math.ceil(products.data.length / 3);
 
 	return (
 		<>

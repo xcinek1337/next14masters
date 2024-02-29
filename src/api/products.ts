@@ -1,56 +1,48 @@
-import { type ProductItemType } from "@/ui/types";
+import {
+	ProductsGetListBySearchDocument,
+	ProductsGetListDocument,
+	type ProductsListItemFragment,
+	SuggestedProductsGetLitDocument,
+} from "@/gql/graphql";
+import { executeGraphQL } from "@/api/graphqlApi";
 
-const API_URL = "https://naszsklep-api.vercel.app/api/products";
+export const getPaginatedListOfProducts = async (take: number, skip: number) => {
+	const graphqlResponse = await executeGraphQL(ProductsGetListDocument, {
+		take,
+		skip,
+	});
 
-type ProductResponseItem = {
-	id: string;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	image: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-};
-
-export const getProductsAllOrPaginated = async (take?: number, offset?: number) => {
-	const takeQueryParam = take ? `?take=${take}` : "";
-	const offsetQueryParam = offset ? `&offset=${offset}` : "";
-
-	const url = `${API_URL}${takeQueryParam}${offsetQueryParam}`;
-
-	const response = await fetch(url);
-
-	if (!response.ok) {
+	if (!graphqlResponse) {
 		throw new Error("Failed to fetch products");
 	}
 
-	const productsRes = (await response.json()) as ProductResponseItem[];
-	const products = productsRes.map(productResponseItemToProductItemType);
-	
-	return products
+	return graphqlResponse.products;
 };
 
+export const getPaginatedListOfProductsBySearch = async (search: string) => {
+	const graphqlResponse = await executeGraphQL(ProductsGetListBySearchDocument, {
+		search,
+	});
 
-export const getProductById = async (id: ProductResponseItem["id"]) => {
-	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
-	const productResponse = (await res.json()) as ProductResponseItem;
+	if (!graphqlResponse) {
+		throw new Error("Failed to fetch products");
+	}
 
-	return productResponseItemToProductItemType(productResponse);
+	return graphqlResponse.products;
 };
 
-const productResponseItemToProductItemType = (product: ProductResponseItem): ProductItemType => {
-	return {
-		id: product.id,
-		name: product.title,
-		category: product.category,
-		price: product.price,
-		description: product.description,
-		coverImage: {
-			alt: product.title,
-			src: product.image,
-		},
-	};
+export const getSuggestedProducts = async (product: ProductsListItemFragment) => {
+	if (!product) return;
+
+	const graphqlResponse = await executeGraphQL(SuggestedProductsGetLitDocument);
+
+	if (!graphqlResponse) {
+		throw new Error("Failed to fetch products");
+	}
+
+	const suggestedProducts = graphqlResponse.products.data.filter((p: ProductsListItemFragment) =>
+		p.categories.some((category) => category.name === product.categories[0]?.name),
+	);
+
+	return suggestedProducts.slice(0, 4);
 };
