@@ -15,7 +15,7 @@ export default async function ProductsLayout({
 	return (
 		<>
 			<section>{children}</section>
-			<Pagination currentPage={currentPage} totalPages={totalPages} />
+			<Pagination  pageNumber={currentPage} totalPages={totalPages} />
 		</>
 	);
 }
