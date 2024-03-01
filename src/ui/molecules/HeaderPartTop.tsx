@@ -7,7 +7,7 @@ export const HeaderPartTop = () => {
 	return (
 		<div className="mx-auto flex w-full max-w-screen-xl items-center justify-between px-3 py-5">
 			<Link href={"/"}>
-				<h2 className="cursor-pointer text-2xl">LOGO</h2>
+				<span className="cursor-pointer text-2xl">LOGO</span>
 			</Link>
 			<article className="flex">
 				<Suspense>

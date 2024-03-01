@@ -9,7 +9,9 @@ export const Navigation = () => {
 					</ActiveLink>
 				</li>
 				<li>
-					<ActiveLink href={"/products"}>All</ActiveLink>
+					<ActiveLink href={"/products"}>
+						All
+					</ActiveLink>
 				</li>
 				<li>
 					<ActiveLink exact href={"/categories"}>
@@ -25,7 +27,7 @@ export const Navigation = () => {
 				<li>
 					<ActiveLink href={"/categories/t-shirts/1"}>T-Shirts</ActiveLink>
 				</li>
-			</ul>{" "}
+			</ul>
 		</nav>
 	);
 };

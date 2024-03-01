@@ -14,8 +14,8 @@ type ActiveLinkProps<T extends string> = {
 } & Omit<LinkProps<T>, "href">;
 
 export const ActiveLink = <T extends string>({
-	activeClassName = "text-teal-500",
-	className = " text-white mr-5 cursor-pointer hover:text-teal-500 transition duration-300 ease-in-out",
+	activeClassName = "border-b-2 border-teal-600 text-teal-400",
+	className = "text-white mr-5 cursor-pointer hover:text-teal-500 transition duration-300 ease-in-out",
 	children,
 	exact,
 	href,
