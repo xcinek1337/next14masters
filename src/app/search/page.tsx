@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { getPaginatedListOfProductsBySearch } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
 
@@ -25,9 +24,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 			<div>
 				<p>searching for {searchParams.query}</p>
 			</div>
-			<Suspense key="searchPage">
-				<ProductList products={products.data} />
-			</Suspense>
+
+			<ProductList products={products.data} />
 		</section>
 	);
 }
