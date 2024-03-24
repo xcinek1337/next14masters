@@ -1,13 +1,13 @@
 "use client";
+
 import Link, { type LinkProps } from "next/link";
-import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { type ReactNode } from "react";
+import clsx from "clsx";
 import { type Route } from "next";
 
 type ActiveLinkProps<T extends string> = {
-	href: Route<T>;
-	children: ReactNode;
+	href?: string;
+	children: React.ReactNode
 	exact?: boolean;
 	className?: string;
 	activeClassName?: string;
@@ -26,7 +26,7 @@ export const ActiveLink = <T extends string>({
 
 	return (
 		<Link
-			href={href}
+			href={href as Route}
 			className={clsx(className, {
 				[activeClassName]: isActive,
 			})}

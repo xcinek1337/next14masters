@@ -1,15 +1,16 @@
-import { type Metadata } from "next";
+import { type Metadata, type Route } from "next";
 import { getPaginatedListOfProducts } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { type ProductSortBy } from "@/gql/graphql";
+import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductsFilter } from "@/ui/atoms/ProductsFilter";
+
 
 type ProductsPageProps = {
 	params: {
-		pageNumber: string[];
+		page: string[];
 	};
 	searchParams: {
-		sort: string;
+		sortBy: string;
 	};
 };
 
@@ -22,27 +23,35 @@ export const metadata: Metadata = {
 	},
 };
 
-export async function generateStaticParams() {
-	const products = await getPaginatedListOfProducts(8, 0);
-	const totalPages = Math.ceil(products.data.length / 8);
-	const paths = Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => ({
-		params: { pageNumber: [String(pageNumber)] },
-	}));
-
-	return paths;
-}
-
 export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
-	const offset = params.pageNumber ? Number(params.pageNumber[0]) * 8 - 8 : 0;
-	const order = searchParams.sort?.includes("-") ? "DESC" : "ASC";
-	const orderBy = searchParams.sort?.replace("-", "").toUpperCase() as ProductSortBy;
-	const products = await getPaginatedListOfProducts(8, offset, order, orderBy);
+	const offset = params.page ? Number(params.page[0]) * 8 - 8 : 0;
+	const order = () => {
+		if (!searchParams.sortBy || searchParams.sortBy === "no-sort") return undefined;
+		if (searchParams.sortBy.includes("-asc")) return "ASC";
+		else return "DESC";
+	};
+	const orderBy = () => {
+		if (!searchParams.sortBy || searchParams.sortBy === "no-sort") return undefined;
+		if (searchParams.sortBy.startsWith("price")) return "PRICE";
+		if (searchParams.sortBy.startsWith("rat")) return "RATING";
+	};
+	const products = await getPaginatedListOfProducts(8, offset, order(), orderBy());
 
 	return (
-		<>
-			<h3 className=" ml-2 py-4 text-2xl ">Products</h3>
-			<ProductsFilter />
+		<section>
+			<div className="flex items-center justify-between">
+				<h1 className="mb-4 w-fit rounded-xl bg-black p-1.5 text-2xl font-bold text-white">
+					All products
+				</h1>
+				<ProductsFilter />
+			</div>
+
 			<ProductList products={products.data || []} />
-		</>
+			<Pagination
+				url={"/products" as Route}
+				pageNumber={params.page ? Number(params.page[0]) : 1}
+				totalPages={Math.ceil(products.meta.total / 8)}
+			/>
+		</section>
 	);
 }
