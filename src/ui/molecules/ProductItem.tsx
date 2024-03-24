@@ -1,13 +1,15 @@
-import { BadgeDollarSign, ShoppingBag } from "lucide-react";
+/* eslint-disable @next/next/no-img-element */
 import { type ProductsListItemFragment } from "@/gql/graphql";
 import { CurrencyParser } from "@/utils/utils";
+import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
+import { Rating } from "@/ui/atoms/Rating";
 
 type ProductItemProps = {
 	product: ProductsListItemFragment;
 };
 export const ProductItem = ({ product }: ProductItemProps) => {
 	return (
-		<article className="flex w-full flex-col gap-12 md:flex-row md:gap-24 py-4">
+		<article className="flex w-full flex-col gap-12 py-4 md:flex-row md:gap-24">
 			<div className="flex flex-shrink-0 justify-center rounded-xl bg-gray-100 px-24 py-12">
 				<img
 					className="object-cover mix-blend-multiply"
@@ -27,23 +29,14 @@ export const ProductItem = ({ product }: ProductItemProps) => {
 						</p>
 					</div>
 					{product?.rating && (
-						<p className="mt-4 text-sm text-gray-500">
-							rating: {product?.rating.toFixed(2)} / 5  
-						</p>
+						<div className="mt-2">
+							<Rating rating={product.rating} />
+						</div>
 					)}
 					<p className="text-md mt-4 italic text-gray-500">{product.description}</p>
 					<p className="text-md mt-4">{product.description}</p>
 				</div>
-				<div className="mt-8 flex justify-end gap-4">
-					<button className="flex items-center gap-4 rounded-lg border p-4 shadow-md transition-all hover:scale-105">
-						Add to cart
-						<ShoppingBag size={24} color="black" />
-					</button>
-					<button className="flex items-center gap-4 rounded-lg border p-4 shadow-md transition-all hover:scale-105">
-						Buy it now
-						<BadgeDollarSign size={24} color="black" />
-					</button>
-				</div>
+				<AddToCartButton productId={product.id} />
 			</div>
 		</article>
 	);

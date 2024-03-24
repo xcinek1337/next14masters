@@ -1,7 +1,8 @@
 import { Suspense } from "react";
 import Link from "next/link";
-import { ShoppingCart, User } from "lucide-react";
+import { User } from "lucide-react";
 import { HeaderInput } from "@/ui/atoms/HeaderInput";
+import { Cart } from "@/ui/molecules/Cart";
 
 export const HeaderPartTop = () => {
 	return (
@@ -16,10 +17,7 @@ export const HeaderPartTop = () => {
 				<p className="mx-5 flex items-end">
 					<User size={32} /> Sign in or Create Account{" "}
 				</p>
-				<p className="flex items-end">
-					<ShoppingCart size={32} />
-					Shopping Cart
-				</p>
+				<Cart />
 			</article>
 		</div>
 	);

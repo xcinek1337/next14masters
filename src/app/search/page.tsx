@@ -10,8 +10,8 @@ type SearchPageProps = {
 
 export async function generateMetadata({ searchParams }: SearchPageProps) {
 	return {
-		title: `Search results for: ${searchParams.query}`,
-		description: `Search results for: ${searchParams.query}`,
+		title: `Search results for ${searchParams.query}`,
+		description: `Search results for ${searchParams.query}`,
 	};
 }
 
@@ -22,6 +22,9 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
 	return (
 		<section>
+			<div>
+				<p>searching for {searchParams.query}</p>
+			</div>
 			<Suspense key="searchPage">
 				<ProductList products={products.data} />
 			</Suspense>

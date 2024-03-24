@@ -1,5 +1,5 @@
 import { Navigation } from "@/ui/molecules/Navigation";
-import { HeaderPartTop } from "@/ui/molecules/HeaderPartTop";
+import { HeaderPartTop } from "@/ui/molecules/Header";
 
 export const Header = () => {
 	return (

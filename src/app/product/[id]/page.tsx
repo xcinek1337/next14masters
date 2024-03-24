@@ -1,9 +1,10 @@
 import { type Metadata } from "next";
 import { Suspense } from "react";
-import { getProductById } from "@/api/product";
+import { getProductById, getProductReviewsById } from "@/api/product";
 import { ProductItem } from "@/ui/molecules/ProductItem";
 import { getSuggestedProducts } from "@/api/products";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { Reviews } from "@/ui/organisms/Reviews";
 
 type Params = {
 	params: {
@@ -37,6 +38,8 @@ export default async function ProductPage({ params }: Params) {
 
 	const suggestedProducts = await getSuggestedProducts(data.product);
 
+	const productReviews = await getProductReviewsById(data.product.id);
+
 	return (
 		<section className="md:mx-24">
 			<Suspense key="product">
@@ -45,14 +48,14 @@ export default async function ProductPage({ params }: Params) {
 			<Suspense key="suggestedProducts">
 				{suggestedProducts && (
 					<div data-testid="related-products" className="my-8 border-t">
-						<h2 className="font-medium text-2xl pb-10">
-							Related products
-						</h2>
+						<h2 className="pb-10 text-2xl font-medium">Related products</h2>
 						<ProductList products={suggestedProducts} />
 					</div>
 				)}
 			</Suspense>
+			{productReviews.product?.reviews && (
+				<Reviews product={data.product} reviews={productReviews.product.reviews} />
+			)}
 		</section>
 	);
 }
-
