@@ -22,7 +22,7 @@ export const ProductListItemDescription = ({
 			</div>
 			<p data-testid="product-price" className="text-sm font-medium text-gray-900">
 				{/* <span className="sr-only">Price:</span> */}
-				{CurrencyParser(price / 100)}
+				{CurrencyParser(price)}
 			</p>
 			
 		</div>
