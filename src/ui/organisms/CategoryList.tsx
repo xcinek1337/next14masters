@@ -10,6 +10,7 @@ export const CategoryList = ({ categories }: ProductListProps): JSX.Element => (
 	<ul className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
 		{categories.map((category) => (
 			<CardLink
+				src={`${category.name}.avif`}
 				name={category.name}
 				key={category.id}
 				href={`/categories/${category.slug}/1` as Route}
