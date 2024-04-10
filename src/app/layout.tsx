@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/ui/organisms/Footer";
 import { Header } from "@/ui/organisms/Header";
+import { SiteMap } from "@/ui/molecules/SiteMap";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,12 +18,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="pl">
+		<html  lang="pl">
 			<body className={inter.className}>
 				<Header />
-				<main className="mx-auto max-w-md p-12  sm:max-w-2xl sm:py-2 md:max-w-4xl lg:max-w-7xl">
+				<main className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-2 md:max-w-4xl lg:max-w-7xl">
 					{children}
 				</main>
+				<SiteMap />
 				<Footer />
 			</body>
 		</html>

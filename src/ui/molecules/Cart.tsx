@@ -9,9 +9,9 @@ export const Cart = async () => {
 	const quantity = cart?.items.reduce((acc, item) => acc + item.quantity, 0) || 0;
 
 	return (
-		<ActiveLink className="relative flex items-end" activeClassName="" href={"/cart"}>
+		<ActiveLink className="relative flex items-end " activeClassName="" href={"/cart"}>
 			<ShoppingCart size={32} />
-			Shopping Cart
+			<span className="hidden md:block">Shopping Cart</span>
 			{quantity > 0 ? (
 				<div className="absolute left-3 top-[-12px]">
 					<Badge value={quantity} />

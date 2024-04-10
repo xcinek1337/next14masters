@@ -21,16 +21,14 @@ export default async function HomePage() {
 	if (!products || products.data.length === 0) return <p>No products found.</p>;
 	return (
 		<section>
-			<h1 className="text-xl text-center py-4">
-				New collections
-			</h1>
-			<Suspense key="collectionList">
-				<CollectionList collections={collections.data} />
-			</Suspense>
+			
+			<CollectionList collections={collections.data} />
+
 			<Suspense>
-				<h2 className="font-medium text-2xl pb-10">Recently Sold</h2>
+				<h2 className="pb-10 text-2xl font-medium">Recently Sold</h2>
 				<ProductList products={products.data} />
 			</Suspense>
+
 		</section>
 	);
 }
