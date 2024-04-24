@@ -27,7 +27,7 @@ export const ProductsFilter = () => {
 
 	return (
 		<select
-			className="cursor-pointer rounded-md border border-r-8 border-transparent px-2 py-1 text-sm font-light outline outline-2 lg:mt-1"
+			className="w-fit cursor-pointer rounded-md border border-r-8 border-transparent px-2 py-1 text-xs font-light sm:outline outline-2 sm:text-sm lg:mt-1"
 			value={sortBy}
 			onChange={handleChange}
 		>

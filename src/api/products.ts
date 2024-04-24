@@ -22,9 +22,6 @@ export const getPaginatedListOfProducts = async (
 			order,
 			orderBy,
 		},
-		next: {
-			revalidate: 15,
-		},
 	});
 
 	if (!graphqlResponse) {

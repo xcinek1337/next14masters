@@ -1,4 +1,3 @@
-import { type Route } from "next";
 import { getCategoryProductsBySlug } from "@/api/categories";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
@@ -6,7 +5,7 @@ import { ProductList } from "@/ui/organisms/ProductList";
 type CategoriesNamePageProps = {
 	params: {
 		name: string;
-		page: string;
+		pageNumber: string;
 	};
 };
 
@@ -29,23 +28,24 @@ export default async function CategoriesNamePage({ params }: CategoriesNamePageP
 	if (!category || category.products.length === 0) return <p>No products found.</p>;
 
 	const take = 4;
-	const pageNumber = params.page ? Number(params.page[0]) : 1;
+	const currentNumber = params.pageNumber ? Number(params.pageNumber[0]) : 1;
 	const totalPages = Math.ceil(category.products.length / take);
 
 	// frontend pagination
-	const slicedProducts = category.products.slice((pageNumber - 1) * take, pageNumber * take);
+	const slicedProducts = category.products.slice((currentNumber - 1) * take, currentNumber * take);
 
+	console.log(params);
 	return (
 		<section>
-			<div className="mb-4">
+			<div className="my-4">
 				<h1 className="text-2xl font-bold">{category.name}</h1>
 				<p className="italic">{category.description}</p>
 			</div>
 			<ProductList products={slicedProducts} />
 			<Pagination
-				pageNumber={pageNumber}
+				currentPage={currentNumber}
 				totalPages={totalPages}
-				url={`/categories/${params.name}` as Route}
+				linkTo={`categories/${params.name}`}
 			/>
 		</section>
 	);

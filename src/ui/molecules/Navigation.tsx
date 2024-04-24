@@ -9,7 +9,7 @@ export const Navigation = () => {
 					</ActiveLink>
 				</li>
 				<li>
-					<ActiveLink href={"/products"}>All</ActiveLink>
+					<ActiveLink  href={"/products"}>All</ActiveLink>
 				</li>
 				<li>
 					<ActiveLink exact href={"/categories"}>
